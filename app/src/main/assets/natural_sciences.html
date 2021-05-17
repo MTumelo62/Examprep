@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <meta charset="UTF-8">
+    <meta name="description" content="multiple choice">
+    <meta name="keywords" content="HTML,CSS,,JavaScript">
+    <meta name="author" content="Tumelo Malebane">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<meta charset="UTF-8">
+
+<script>
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+var questions = [
+
+               [ "An annual plant is a plant that:", "Lives for exactly one year and then dies", "Completes its entire life cycle in a less than a year and then dies", "flowers once a year", "B" ],
+	 [ "Mutualism is a relationship where:", "Only one partner benefits", "Both partners benefit", "One partner benefits and the other is harmed", "B" ],
+	[ "Plants do not…", "excrete", "respond to the environment", "move from place to place (locomotion)", "C" ],
+	[ "Annual plants (flowering plant group) reproduce by…", "seeds", "being visited by animals", "mating", "A" ],
+               [ "A histogram is…", "identical to a bar graph", "a type of bar graph that shows ranges", "bigger than a bar graph", "B" ],
+	[ "If you heat a liquid like water that is at room temperature the…", "liquid freezes", "temperature of the liquid decreases", "temperature of the liquid increases", "C" ],
+	[ "What do you notice about the temperature of water when its starts boiling?", "Temperature of water remains the same", "Temperature of water decreases", "Temperature of water increases", "A" ],
+               [ "Which of the following is not a renewable source of energy?", "Coal", "Petrol", "Solar", "B" ],
+	[ "Energy that travels from the Sun to Earth is by… ", "convection", "a miracle", "radiation", "C" ],
+	[ "Which of the following is a mixture?", "table salt (compound sodium chloride)", "pure water", "air", "A" ],
+
+
+];
+
+function _(x){
+	return document.getElementById(x);
+}
+
+function renderQuestion(){
+	test = _("test");
+	if(pos >= questions.length){
+		test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+		_("test_status").innerHTML = "Test Completed";
+		pos = 0;
+		correct = 0;
+		return false;
+	}
+	_("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+	question = questions[pos][0];
+	chA = questions[pos][1];
+	chB = questions[pos][2];
+	chC = questions[pos][3];
+	test.innerHTML = "<h3>"+question+"</h3>";
+	test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br><br>";
+	test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+
+function checkAnswer(){
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){
+			choice = choices[i].value;
+		}
+	}
+	if(choice == questions[pos][4]){
+		correct++;
+	}
+	pos++;
+	renderQuestion();
+}
+
+window.addEventListener("load", renderQuestion, false);
+</script>
+<body>
+<h2 id="test_status"></h2>
+<div id="test"></div>
+</body>
+</html>
+
